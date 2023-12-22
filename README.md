@@ -7,7 +7,11 @@ Configuration files for my personal nvim setup
 I am running NVIM v0.9.4, but dependencies could change in the future.
 
 ## Installation
-Before installing, save a backup of your previous nvim configuration files if desired. The following command assumes you have not yet configured nvim.
+Before installing, save a backup of your previous nvim configuration if desired, and then delete the directory if it exists.
+```sh
+rm -rf ~/.config/nvim
+```
+Now you can download the repository.
 ```sh
 git clone https://github.com/N8WM/nvim-config.git ~/.config/nvim
 ```
