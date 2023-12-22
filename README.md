@@ -4,7 +4,7 @@ Configuration files for my personal nvim setup
 *Inspired by [@typecraft](https://www.youtube.com/@typecraft_dev)*
 
 ## Requirements
-I am running NVIM v0.9.4, but dependencies could change in the future.
+I am running NVIM v0.9.4, but dependencies could change in the future. If using a Mac, `brew install neovim` is a good option for sourcing nvim.
 
 ## Installation
 Before installing, save a backup of your previous nvim configuration if desired, and then delete the directory if it exists.
