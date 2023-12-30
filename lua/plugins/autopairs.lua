@@ -1,7 +1,11 @@
 return {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
-    opts = { -- this is equalent to setup({}) function
-        check_ts = true
-    }
+    opts = {},
+    config = function()
+        require("nvim-autopairs").setup({
+            disable_filetype = { "TelescopePrompt" },
+            check_ts = true
+        })
+    end
 }
