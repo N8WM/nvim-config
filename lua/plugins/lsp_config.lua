@@ -8,8 +8,6 @@ local on_attach = function(_, _)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 end
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 return {
     {
         "williamboman/mason.nvim",
@@ -48,6 +46,7 @@ return {
                     "jdtls",
                 },
             })
+            local capabilities = require('cmp_nvim_lsp').default_capabilities()
             require("mason-lspconfig").setup_handlers({
                 -- The first entry (without a key) will be the default handler
                 -- and will be called for each installed server that doesn't have
