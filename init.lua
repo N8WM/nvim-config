@@ -20,6 +20,11 @@ vim.o.wildmenu = true
 vim.o.wildmode = 'list:longest'
 vim.o.wildignore = '*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx'
 
+vim.o.pumheight = 10
+vim.o.pumblend = 20
+vim.o.winblend = 10
+
+
 -- Set autocommands
 vim.api.nvim_create_autocmd('FileType', {
     pattern = {'css', 'html', 'javascript', 'tex', 'yaml'},

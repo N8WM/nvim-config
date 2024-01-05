@@ -21,7 +21,7 @@ Now you can download the repository.
 ```sh
 git clone https://github.com/N8WM/nvim-config.git ~/.config/nvim
 ```
-The first time running nvim after this command should install all dependencies and packages. The only thing left to do is to register your GitHub Copilot account (if you have one) with the command `:Copilot setup`.
+The first time running nvim after this command should install all dependencies and packages. The only thing left to do is to register your GitHub Copilot account (if you have one) with the command `:Copilot auth`.
 
 ## Note
 I recommend using [DroidSansMono NerdFont](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/DroidSansMono.zip) (from [nerdfonts.com](https://www.nerdfonts.com/font-downloads)) in your terminal emulator.
