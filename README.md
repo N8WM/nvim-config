@@ -2,7 +2,7 @@
 Configuration files for my personal nvim setup
 
 <div align="center">
-    <img src="./nvim.png?raw=true" alt="DAC connections" width="90%" />
+    <img src="./nvim.png?raw=true" alt="DAC connections" width="100%" />
 </div>
 
 *Inspired by [@typecraft](https://www.youtube.com/@typecraft_dev)*
