@@ -24,6 +24,8 @@ vim.o.pumheight = 10
 vim.o.pumblend = 20
 vim.o.winblend = 10
 
+vim.o.textwidth = 80
+
 
 -- Set autocommands
 vim.api.nvim_create_autocmd('FileType', {
