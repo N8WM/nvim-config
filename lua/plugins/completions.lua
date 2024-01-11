@@ -104,6 +104,14 @@ return {
                     },
                 },
             })
+
+            -- Disable cmp for certain filetypes
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = {"markdown", "text"},
+                callback = function()
+                    require'cmp'.setup.buffer { enabled = false }
+                end,
+            })
         end,
     },
 }
