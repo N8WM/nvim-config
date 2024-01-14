@@ -22,7 +22,6 @@ return {
                 ensure_installed = {
                     "angularls",
                     "arduino_language_server",
-                    "asm_lsp",
                     "bashls",
                     "clangd",
                     "omnisharp",
@@ -32,7 +31,6 @@ return {
                     "eslint",
                     "fortls",
                     "html",
-                    "htmx",
                     "jsonls",
                     "tsserver",
                     "texlab",
