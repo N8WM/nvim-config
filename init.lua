@@ -28,7 +28,7 @@ vim.o.textwidth = 80
 
 -- Set autocommands
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "css", "html", "javascript", "tex", "yaml" },
+	pattern = { "css", "html", "javascript", "tex", "yaml", "markdown" },
 	callback = function()
 		vim.bo.tabstop = 2
 		vim.bo.softtabstop = 2
