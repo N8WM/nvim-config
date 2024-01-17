@@ -42,6 +42,7 @@ return {
                     "lemminx",
                     "yamlls",
                     "jdtls",
+                    "slint_lsp",
                 },
             })
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
