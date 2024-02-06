@@ -22,5 +22,10 @@ return {
 				},
 			},
 		})
+
+		vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { silent = true })
+		vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { silent = true })
+		vim.keymap.set("n", "<leader><Tab>", ":BufferLineMoveNext<CR>", { silent = true })
+		vim.keymap.set("n", "<leader><S-Tab>", ":BufferLineMovePrev<CR>", { silent = true })
 	end,
 }
