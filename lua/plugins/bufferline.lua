@@ -8,10 +8,11 @@ return {
 
 		vim.opt.termguicolors = true
 
-		require("bufferline").setup({
+		local bufferline = require("bufferline")
+		bufferline.setup({
 			options = {
 				diagnostics = "nvim_lsp",
-				separator_style = "padded_slant",
+				separator_style = "thin",
 				offsets = {
 					{
 						filetype = "neo-tree",
@@ -19,6 +20,12 @@ return {
 						highlight = "Directory",
 						separator = true,
 					},
+				},
+				style_preset = bufferline.style_preset.minimal,
+			},
+			highlights = {
+				indicator_selected = {
+					fg = "#6484ff",
 				},
 			},
 		})

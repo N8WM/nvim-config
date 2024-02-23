@@ -1,3 +1,5 @@
+local flavor = "mocha"
+
 return {
 	"catppuccin/nvim",
 	lazy = false,
@@ -6,7 +8,7 @@ return {
 	config = function()
 		vim.cmd.colorscheme("catppuccin")
         require("catppuccin").setup({
-            flavour = "mocha",
+            flavour = flavor,
             integrations = {
                 cmp = true,
                 gitsigns = true,
@@ -20,7 +22,7 @@ return {
         })
 
         -- Neotree colors
-        local colors = require("catppuccin.palettes").get_palette "mocha"
+        local colors = require("catppuccin.palettes").get_palette(flavor)
 
         vim.api.nvim_set_hl(0, 'NeoTreeGitAdded', { fg = colors.green })
         vim.api.nvim_set_hl(0, 'NeoTreeGitConflict', { fg = colors.red })

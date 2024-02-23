@@ -318,6 +318,7 @@ return {
                     vim.cmd "Neotree show"
                     vim.g.neotree_opened = true
                     vim.defer_fn(function()
+                        vim.cmd("Bdelete")
                         vim.cmd("Neotree focus")
                     end, 100)
                 end
