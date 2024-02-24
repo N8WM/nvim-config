@@ -19,6 +19,7 @@ vim.o.scrolloff = 1
 vim.o.wildmenu = true
 vim.o.wildmode = "list:longest"
 vim.o.wildignore = "*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx"
+vim.o.wrap = false
 
 vim.o.pumheight = 10
 vim.o.pumblend = 20
@@ -54,10 +55,10 @@ end
 
 vim.g.mapleader = " "
 
-vim.keymap.set({ "n", "v", "i" }, "<M-Up>", "<Esc><C-w><Up>", { noremap = true })
-vim.keymap.set({ "n", "v", "i" }, "<M-Down>", "<Esc><C-w><Down>", { noremap = true })
-vim.keymap.set({ "n", "v", "i" }, "<M-Left>", "<Esc><C-w><Left>", { noremap = true })
-vim.keymap.set({ "n", "v", "i" }, "<M-Right>", "<Esc><C-w><Right>", { noremap = true })
+vim.keymap.set({ "n", "v", "i" }, "<M-Up>", "<Esc><C-w><Up>", { noremap = true, desc = "Focus window above" })
+vim.keymap.set({ "n", "v", "i" }, "<M-Down>", "<Esc><C-w><Down>", { noremap = true, desc = "Focus window below" })
+vim.keymap.set({ "n", "v", "i" }, "<M-Left>", "<Esc><C-w><Left>", { noremap = true, desc = "Focus window left" })
+vim.keymap.set({ "n", "v", "i" }, "<M-Right>", "<Esc><C-w><Right>", { noremap = true, desc = "Focus window right" })
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

@@ -25,14 +25,26 @@ return {
 			},
 			highlights = {
 				indicator_selected = {
-					fg = "#6484ff",
+					fg = "#64a4ff",
 				},
 			},
 		})
 
-		vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { silent = true })
-		vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { silent = true })
-		vim.keymap.set("n", "<leader><Tab>", ":BufferLineMoveNext<CR>", { silent = true })
-		vim.keymap.set("n", "<leader><S-Tab>", ":BufferLineMovePrev<CR>", { silent = true })
+		vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", {
+			silent = true,
+			desc = "Move to the next buffer",
+		})
+		vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", {
+			silent = true,
+			desc = "Move to the previous buffer",
+		})
+		vim.keymap.set("n", "<leader><Tab>", ":BufferLineMoveNext<CR>", {
+			silent = true,
+			desc = "Move the active buffer to the next position",
+		})
+		vim.keymap.set("n", "<leader><S-Tab>", ":BufferLineMovePrev<CR>", {
+			silent = true,
+			desc = "Move the active buffer to the previous position",
+		})
 	end,
 }
