@@ -26,7 +26,7 @@ vim.o.pumheight = 10
 vim.o.pumblend = 0 -- 20
 vim.o.winblend = 0 -- 10
 vim.o.guicursor = "i:block-blinkon1"
-vim.o.textwidth = 80
+-- vim.o.textwidth = 80
 
 vim.o.wrap = true
 vim.o.linebreak = true
