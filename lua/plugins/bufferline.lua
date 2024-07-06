@@ -19,6 +19,7 @@ return {
 						text = current_dir_name,
 						highlight = "Directory",
 						separator = true,
+                        text_align = "left"
 					},
 				},
 				style_preset = bufferline.style_preset.minimal,

@@ -40,50 +40,79 @@ vim.o.showbreak = "↪ "
 --     end,
 -- })
 
+-- Fold settings
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.foldlevel = 99 -- Open all folds by default
+
 -- Set autocommands
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "css", "html", "javascript", "tex", "yaml", "markdown" },
-    callback = function()
-        local bufnr = vim.api.nvim_get_current_buf()
-        vim.api.nvim_buf_set_option(bufnr, "tabstop", 2)
-        vim.api.nvim_buf_set_option(bufnr, "softtabstop", 2)
-        vim.api.nvim_buf_set_option(bufnr, "shiftwidth", 2)
-    end,
+	pattern = { "css", "html", "xml", "javascript", "tex", "yaml", "toml", "markdown" },
+	callback = function()
+		local bufnr = vim.api.nvim_get_current_buf()
+		vim.api.nvim_buf_set_option(bufnr, "tabstop", 2)
+		vim.api.nvim_buf_set_option(bufnr, "softtabstop", 2)
+		vim.api.nvim_buf_set_option(bufnr, "shiftwidth", 2)
+	end,
 })
 
 vim.api.nvim_create_autocmd("BufReadPost", {
-    pattern = "*",
-    callback = function()
-        if vim.fn.line("'\"") > 0 and vim.fn.line("'\"") <= vim.fn.line("$") then
-            vim.cmd('normal! g`"')
-        end
-    end,
+	pattern = "*",
+	callback = function()
+		if vim.fn.line("'\"") > 0 and vim.fn.line("'\"") <= vim.fn.line("$") then
+			vim.cmd('normal! g`"')
+		end
+	end,
 })
 
 -- Set undo options if version is 7.3 or above
 if vim.version().minor >= 3 then
-    vim.o.undodir = os.getenv("HOME") .. "/.vim/backup"
-    vim.o.undofile = true
-    vim.o.undoreload = 10000
+	vim.o.undodir = os.getenv("HOME") .. "/.vim/backup"
+	vim.o.undofile = true
+	vim.o.undoreload = 10000
 end
 
 vim.g.mapleader = " "
 
+-- Window navigation
 vim.keymap.set({ "n", "v", "i" }, "<M-Up>", "<Esc><C-w><Up>", { noremap = true, desc = "Focus window above" })
 vim.keymap.set({ "n", "v", "i" }, "<M-Down>", "<Esc><C-w><Down>", { noremap = true, desc = "Focus window below" })
 vim.keymap.set({ "n", "v", "i" }, "<M-Left>", "<Esc><C-w><Left>", { noremap = true, desc = "Focus window left" })
 vim.keymap.set({ "n", "v", "i" }, "<M-Right>", "<Esc><C-w><Right>", { noremap = true, desc = "Focus window right" })
 
+-- Define a function to toggle diagnostics
+function ToggleDiagnostics()
+	if vim.g.diagnostics_visible == nil then
+		vim.g.diagnostics_visible = true
+	end
+
+	if vim.g.diagnostics_visible then
+		vim.diagnostic.disable(0)
+		vim.g.diagnostics_visible = false
+	else
+		vim.diagnostic.enable(0)
+		vim.g.diagnostics_visible = true
+	end
+end
+
+-- Set up a key mapping to toggle diagnostics
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>d",
+	"<cmd>lua ToggleDiagnostics()<CR>",
+	{ noremap = true, silent = true, desc = "Toggle diagnostics" }
+)
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
-        lazypath,
-    })
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
 vim.opt.rtp:prepend(lazypath)
 

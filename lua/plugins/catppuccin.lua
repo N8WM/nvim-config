@@ -6,29 +6,39 @@ return {
 	name = "catppuccin",
 	priority = 1000,
 	config = function()
-		vim.cmd.colorscheme("catppuccin")
 		require("catppuccin").setup({
 			flavour = flavor,
 			integrations = {
+				bufferline = true,
 				cmp = true,
 				gitsigns = true,
-				nvimtree = true,
+				neotree = true,
+				noice = true,
 				treesitter = true,
 				notify = true,
 				mini = {
 					enabled = true,
 				},
+				which_key = true,
 			},
+            highlight_overrides = {
+                all = function(colors)
+                    return {
+                        NeoTreeNormal = { bg = colors.base },
+                        NeoTreeNormalNC = { bg = colors.base },
+                        NeoTreeEndOfBuffer = { bg = colors.base, fg = colors.base },
+                        NeoTreeWinSeparator = { fg = colors.crust },
+
+                        NeoTreeGitAdded = { fg = colors.green },
+                        NeoTreeGitConflict = { fg = colors.red },
+                        NeoTreeGitDeleted = { fg = colors.mauve },
+                        NeoTreeGitIgnored = { fg = colors.overlay0 },
+                        NeoTreeGitModified = { fg = colors.yellow },
+                        NeoTreeGitUntracked = { fg = colors.sapphire },
+                    }
+                end
+            }
 		})
-
-		-- Neotree colors
-		local colors = require("catppuccin.palettes").get_palette(flavor)
-
-		vim.api.nvim_set_hl(0, "NeoTreeGitAdded", { fg = colors.green })
-		vim.api.nvim_set_hl(0, "NeoTreeGitConflict", { fg = colors.red })
-		vim.api.nvim_set_hl(0, "NeoTreeGitDeleted", { fg = colors.mauve })
-		vim.api.nvim_set_hl(0, "NeoTreeGitIgnored", { fg = colors.overlay0 })
-		vim.api.nvim_set_hl(0, "NeoTreeGitModified", { fg = colors.yellow })
-		vim.api.nvim_set_hl(0, "NeoTreeGitUntracked", { fg = colors.sapphire })
+		vim.cmd.colorscheme("catppuccin")
 	end,
 }

@@ -1,14 +1,36 @@
-local on_attach = function(_, _)
-	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol under cursor" })
-	vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "View code actions" })
+Attachable = {
+	map_rename = function(_, _)
+		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol under cursor" })
+	end,
+	map_code_actions = function(_, _)
+		vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "View code actions" })
+	end,
+	map_definition = function(_, _)
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "View definition" })
+	end,
+	map_implementation = function(_, _)
+		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "View implementation" })
+	end,
+	map_references = function(_, _)
+		vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, { desc = "View references" })
+	end,
+	map_hover = function(_, _)
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "View documentation" })
+	end,
+}
 
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "View definition" })
-	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "View implementation" })
-	vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, { desc = "View references" })
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "View documentation" })
+function Generate_on_attach(attachments)
+	return function(client, bufnr)
+		for _, func in pairs(attachments) do
+			func(client, bufnr)
+		end
+	end
 end
 
 return {
+	{
+		"mfussenegger/nvim-jdtls",
+	},
 	{
 		"williamboman/mason.nvim",
 		config = function()
@@ -44,6 +66,7 @@ return {
 					"jdtls",
 					"slint_lsp",
 				},
+				automatic_installation = true,
 			})
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			require("mason-lspconfig").setup_handlers({
@@ -52,13 +75,37 @@ return {
 				-- a dedicated handler.
 				function(server_name) -- default handler (optional)
 					require("lspconfig")[server_name].setup({
-						on_attach = on_attach,
+						on_attach = Generate_on_attach(Attachable),
 						capabilities = capabilities,
 					})
 				end,
 
+				["jdtls"] = function() end,
+
+				-- ["pyright"] = function()
+				-- 	lspconfig.pyright.setup({
+				-- 		on_attach = generate_on_attach(attachable),
+				-- 		capabilities = capabilities,
+				-- 	})
+				-- end,
+				-- ["ruff_lsp"] = function()
+				-- 	lspconfig.ruff_lsp.setup({
+				-- 		on_attach = generate_on_attach({
+				-- 			attachable.map_code_actions,
+				-- 		}),
+				-- 		capabilities = capabilities,
+				-- 		init_options = {
+				-- 			settings = {
+				-- 				args = {
+				-- 					"--ignore",
+				-- 					"D100",
+				-- 				},
+				-- 			},
+				-- 		},
+				-- 	})
+				-- end,
+
 				-- ["lua_ls"] = function()
-				--     local lspconfig = require("lspconfig")
 				--     lspconfig.lua_ls.setup({...})
 				-- end
 			})
@@ -81,6 +128,11 @@ return {
 
 		config = function()
 			local null_ls = require("null-ls")
+			null_ls.setup({
+				sources = {
+					-- Anything not supported by mason.
+				},
+			})
 			require("mason-null-ls").setup({
 				ensure_installed = {
 					-- formatting
@@ -88,16 +140,13 @@ return {
 					"prettierd",
 					"isort",
 					"black",
+					"pyright",
 					-- diagnostics
 					"eslint_d",
+					"sqlfluff",
 				},
 				automatic_installation = true,
 				handlers = {},
-			})
-			null_ls.setup({
-				sources = {
-					-- Anything not supported by mason.
-				},
 			})
 		end,
 	},
