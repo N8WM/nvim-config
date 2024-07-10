@@ -65,6 +65,7 @@ return {
 					"yamlls",
 					"jdtls",
 					"slint_lsp",
+					"sqlls",
 				},
 				automatic_installation = true,
 			})
@@ -128,9 +129,16 @@ return {
 
 		config = function()
 			local null_ls = require("null-ls")
+			local sfignore = "CP02,RF04"
+
 			null_ls.setup({
 				sources = {
-					-- Anything not supported by mason.
+					null_ls.builtins.diagnostics.sqlfluff.with({
+						extra_args = { "--dialect", "mysql", "--exclude-rules", sfignore },
+					}),
+					null_ls.builtins.formatting.sqlfluff.with({
+						extra_args = { "--dialect", "mysql", "--exclude-rules", sfignore },
+					}),
 				},
 			})
 			require("mason-null-ls").setup({
