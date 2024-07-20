@@ -45,6 +45,8 @@ vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.foldlevel = 99 -- Open all folds by default
 
+vim.o.updatetime = 750
+
 -- Set autocommands
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "css", "html", "xml", "javascript", "tex", "yaml", "toml", "markdown" },
@@ -80,8 +82,13 @@ vim.keymap.set({ "n", "v", "i" }, "<M-Down>", "<Esc><C-w><Down>", { noremap = tr
 vim.keymap.set({ "n", "v", "i" }, "<M-Left>", "<Esc><C-w><Left>", { noremap = true, desc = "Focus window left" })
 vim.keymap.set({ "n", "v", "i" }, "<M-Right>", "<Esc><C-w><Right>", { noremap = true, desc = "Focus window right" })
 
+vim.diagnostic.config({
+	float = { border = "rounded" },
+	virtual_text = false,
+})
+
 -- Define a function to toggle diagnostics
-function ToggleDiagnostics()
+local function toggleDiagnostics()
 	if vim.g.diagnostics_visible == nil then
 		vim.g.diagnostics_visible = true
 	end
@@ -89,19 +96,16 @@ function ToggleDiagnostics()
 	if vim.g.diagnostics_visible then
 		vim.diagnostic.disable(0)
 		vim.g.diagnostics_visible = false
+		print("Diagnostics hidden")
 	else
 		vim.diagnostic.enable(0)
 		vim.g.diagnostics_visible = true
+		print("Diagnostics revealed")
 	end
 end
 
 -- Set up a key mapping to toggle diagnostics
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>d",
-	"<cmd>lua ToggleDiagnostics()<CR>",
-	{ noremap = true, silent = true, desc = "Toggle diagnostics" }
-)
+vim.keymap.set("n", "<leader>d", toggleDiagnostics, { noremap = true, silent = true, desc = "Toggle diagnostics" })
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

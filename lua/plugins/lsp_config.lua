@@ -1,3 +1,30 @@
+local function enable_open_float()
+	if not vim.g.open_float_cmd then
+		vim.api.nvim_create_autocmd({ "CursorHold" }, {
+			pattern = "*",
+			callback = function()
+				for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+					if vim.api.nvim_win_get_config(winid).zindex then
+						return
+					end
+				end
+				vim.diagnostic.open_float({
+					scope = "cursor",
+					focusable = false,
+					close_events = {
+						"CursorMoved",
+						"CursorMovedI",
+						"BufHidden",
+						"InsertCharPre",
+						"WinLeave",
+					},
+				})
+			end,
+		})
+	end
+	vim.g.open_float_cmd = true
+end
+
 Attachable = {
 	map_rename = function(_, _)
 		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol under cursor" })
@@ -16,6 +43,9 @@ Attachable = {
 	end,
 	map_hover = function(_, _)
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "View documentation" })
+	end,
+	enable_error_float = function(_, _)
+		enable_open_float()
 	end,
 }
 

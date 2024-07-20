@@ -73,9 +73,9 @@ return {
 				}),
 				sources = cmp.config.sources({
 					-- { name = "nvim_lsp_signature_help" },
-					{ name = "copilot", priority = 8 },
-					{ name = "nvim_lsp", priority = 8 },
-					{ name = "luasnip", priority = 7 },
+					{ name = "copilot", priority = 8, group_index = 2  },
+					{ name = "nvim_lsp", priority = 8, group_index = 2 },
+					{ name = "luasnip", priority = 7, group_index = 2 },
 					{ name = "buffer", priority = 7 }, -- first for locality sorting?
 					{ name = "spell", keyword_length = 3, priority = 5, keyword_pattern = [[\w\+]] },
 					{ name = "dictionary", keyword_length = 3, priority = 5, keyword_pattern = [[\w\+]] }, -- from uga-rosa/cmp-dictionary plug
