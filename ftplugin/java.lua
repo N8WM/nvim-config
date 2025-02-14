@@ -8,13 +8,7 @@ local config = {
 		workspace_dir,
 	},
 	root_dir = vim.fs.root(0, { ".git", "mvnw", "gradlew" }),
-	on_attach = Generate_on_attach({
-		Attachable.map_code_actions,
-		Attachable.map_definition,
-		Attachable.map_implementation,
-		Attachable.map_references,
-		Attachable.map_rename,
-	}),
+	on_attach = Generate_on_attach(Attachable),
 }
 
 require("jdtls").start_or_attach(config)

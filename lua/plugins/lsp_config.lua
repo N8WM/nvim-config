@@ -1,3 +1,36 @@
+local function open_float(scope)
+	if vim.g.saved_float_bufnr and vim.api.nvim_buf_is_valid(vim.g.saved_float_bufnr) then
+		return
+	end
+	local opts = {
+		scope = scope,
+		focusable = false,
+		close_events = {
+			"CursorMoved",
+			"CursorMovedI",
+			"BufHidden",
+			"InsertCharPre",
+			"WinLeave",
+		},
+	}
+	local float_bufnr, winid = vim.diagnostic.open_float(opts)
+	vim.g.saved_float_bufnr = float_bufnr
+	vim.g.saved_winid = winid
+end
+
+local function close_float()
+	if vim.g.saved_winid and vim.api.nvim_win_is_valid(vim.g.saved_winid) then
+		vim.api.nvim_win_close(vim.g.saved_winid, true)
+		vim.g.saved_float_bufnr = nil
+		vim.g.saved_winid = nil
+	end
+end
+
+local function lsp_hover()
+	vim.lsp.buf.hover()
+	close_float()
+end
+
 local function enable_open_float()
 	if not vim.g.open_float_cmd then
 		vim.api.nvim_create_autocmd({ "CursorHold" }, {
@@ -8,17 +41,7 @@ local function enable_open_float()
 						return
 					end
 				end
-				vim.diagnostic.open_float({
-					scope = "cursor",
-					focusable = false,
-					close_events = {
-						"CursorMoved",
-						"CursorMovedI",
-						"BufHidden",
-						"InsertCharPre",
-						"WinLeave",
-					},
-				})
+				open_float("cursor")
 			end,
 		})
 	end
@@ -42,7 +65,13 @@ Attachable = {
 		vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, { desc = "View references" })
 	end,
 	map_hover = function(_, _)
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "View documentation" })
+		pcall(vim.api.nvim_del_keymap, "n", "K")
+		vim.keymap.set("n", "K", lsp_hover, { desc = "View documentation" })
+	end,
+	map_error_float = function(_, _)
+		vim.keymap.set("n", "<leader>k", function()
+			open_float("line")
+		end, { desc = "View diagnostic message" })
 	end,
 	enable_error_float = function(_, _)
 		enable_open_float()
@@ -84,7 +113,6 @@ return {
 					"fortls",
 					"html",
 					"jsonls",
-					"tsserver",
 					"texlab",
 					"lua_ls",
 					"marksman",
@@ -188,4 +216,7 @@ return {
 			})
 		end,
 	},
+
+	-- Language Specific Plugins
+	{ "cordx56/rustowl", dependencies = { "neovim/nvim-lspconfig" } },
 }

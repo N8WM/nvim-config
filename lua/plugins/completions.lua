@@ -70,10 +70,28 @@ return {
 							fallback()
 						end
 					end),
+
+                    -- Close CMP window if cursor moves horizontally
+					["<Left>"] = cmp.mapping({
+						i = function(fallback)
+							if cmp.visible() then
+								cmp.close()
+							end
+							fallback()
+						end,
+					}),
+                    ["<Right>"] = cmp.mapping({
+						i = function(fallback)
+							if cmp.visible() then
+								cmp.close()
+							end
+							fallback()
+						end,
+					}),
 				}),
 				sources = cmp.config.sources({
 					-- { name = "nvim_lsp_signature_help" },
-					{ name = "copilot", priority = 8, group_index = 2  },
+					{ name = "copilot", priority = 8, group_index = 2 },
 					{ name = "nvim_lsp", priority = 8, group_index = 2 },
 					{ name = "luasnip", priority = 7, group_index = 2 },
 					{ name = "buffer", priority = 7 }, -- first for locality sorting?

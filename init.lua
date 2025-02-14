@@ -46,6 +46,7 @@ vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.foldlevel = 99 -- Open all folds by default
 
 vim.o.updatetime = 750
+vim.o.shortmess = vim.o.shortmess .. "c"
 
 -- Set autocommands
 vim.api.nvim_create_autocmd("FileType", {
@@ -85,6 +86,7 @@ vim.keymap.set({ "n", "v", "i" }, "<M-Right>", "<Esc><C-w><Right>", { noremap = 
 vim.diagnostic.config({
 	float = { border = "rounded" },
 	virtual_text = false,
+    signs = true,
 })
 
 -- Define a function to toggle diagnostics
