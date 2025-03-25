@@ -17,6 +17,11 @@ return {
 	},
 	{
 		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"hrsh7th/cmp-calc",
+			"f3fora/cmp-spell",
+			"uga-rosa/cmp-dictionary",
+		},
 		config = function()
 			local cmp = require("cmp")
 			local compare = require("cmp.config.compare")
@@ -71,7 +76,7 @@ return {
 						end
 					end),
 
-                    -- Close CMP window if cursor moves horizontally
+					-- Close CMP window if cursor moves horizontally
 					["<Left>"] = cmp.mapping({
 						i = function(fallback)
 							if cmp.visible() then
@@ -80,7 +85,7 @@ return {
 							fallback()
 						end,
 					}),
-                    ["<Right>"] = cmp.mapping({
+					["<Right>"] = cmp.mapping({
 						i = function(fallback)
 							if cmp.visible() then
 								cmp.close()
@@ -92,14 +97,14 @@ return {
 				sources = cmp.config.sources({
 					-- { name = "nvim_lsp_signature_help" },
 					{ name = "copilot", priority = 8, group_index = 2 },
-					{ name = "nvim_lsp", priority = 8, group_index = 2 },
+					{ name = "nvim_lsp", priority = 7, group_index = 2 },
 					{ name = "luasnip", priority = 7, group_index = 2 },
-					{ name = "buffer", priority = 7 }, -- first for locality sorting?
+					{ name = "buffer", priority = 6 }, -- first for locality sorting?
 					{ name = "spell", keyword_length = 3, priority = 5, keyword_pattern = [[\w\+]] },
 					{ name = "dictionary", keyword_length = 3, priority = 5, keyword_pattern = [[\w\+]] }, -- from uga-rosa/cmp-dictionary plug
 					-- { name = 'rg'},
 					{ name = "nvim_lua", priority = 5 },
-					{ name = "path" },
+					{ name = "path", priority = 4},
 					{ name = "fuzzy_path", priority = 4 }, -- from tzacher
 					{ name = "calc", priority = 3 },
 					-- { name = 'vsnip' },
@@ -123,13 +128,7 @@ return {
 				},
 			})
 
-			-- Disable cmp for certain filetypes
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "markdown", "text" },
-				callback = function()
-					require("cmp").setup.buffer({ enabled = false })
-				end,
-			})
+			-- Disable cmp for certain filetypes: HANDLED IN <init.lua>
 		end,
 	},
 }
