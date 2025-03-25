@@ -37,28 +37,15 @@ vim.api.nvim_create_autocmd("FileType", {
 			buffer = true, -- make it local to the current markdown/text buffer
 		})
 		vim.keymap.set({ "n", "i" }, "<C-S-k>", function()
-			local original_mode = vim.api.nvim_get_mode().mode
 			local original_cursor = vim.api.nvim_win_get_cursor(0)
 
-			end_word_cursor()
+			vim.cmd.normal("z=1")
 
-			vim.schedule(function()
-				cmp.complete({ config = { enabled = true } })
-				cmp.confirm({ select = true })
-
-				cmp.event:on("confirm_done", function()
-					local line = vim.fn.getline(original_cursor[1])
-					local new_col = math.min(original_cursor[2], #line)
-					vim.api.nvim_win_set_cursor(0, { original_cursor[1], new_col })
-
-					if original_mode ~= "i" then
-						vim.cmd("stopinsert")
-						vim.cmd.normal("l")
-					end
-				end)
-			end)
+			local line = vim.fn.getline(original_cursor[1])
+			local new_col = math.min(original_cursor[2], #line)
+			vim.api.nvim_win_set_cursor(0, { original_cursor[1], new_col })
 		end, {
-			desc = "Spelling choose first choice",
+			desc = "Choose first spelling suggestion",
 			buffer = true, -- make it local to the current buffer if desired
 		})
 	end,
