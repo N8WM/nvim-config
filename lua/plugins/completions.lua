@@ -19,7 +19,7 @@ return {
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			"hrsh7th/cmp-calc",
-			"f3fora/cmp-spell",
+			-- "f3fora/cmp-spell",
 			"uga-rosa/cmp-dictionary",
 		},
 		config = function()
@@ -67,6 +67,7 @@ return {
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
+                    ["<Esc>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = false }),
 					["<Tab>"] = vim.schedule_wrap(function(fallback)
 						if cmp.visible() and has_words_before() then
@@ -100,7 +101,7 @@ return {
 					{ name = "nvim_lsp", priority = 7, group_index = 2 },
 					{ name = "luasnip", priority = 7, group_index = 2 },
 					{ name = "buffer", priority = 6 }, -- first for locality sorting?
-					{ name = "spell", keyword_length = 3, priority = 5, keyword_pattern = [[\w\+]] },
+					{ name = "custom_spell", keyword_length = 3, priority = 5, keyword_pattern = [[\w\+]] },
 					{ name = "dictionary", keyword_length = 3, priority = 5, keyword_pattern = [[\w\+]] }, -- from uga-rosa/cmp-dictionary plug
 					-- { name = 'rg'},
 					{ name = "nvim_lua", priority = 5 },
@@ -129,6 +130,8 @@ return {
 			})
 
 			-- Disable cmp for certain filetypes: HANDLED IN <init.lua>
+
+            cmp.register_source("custom_spell", require("custom.spell").new())
 		end,
 	},
 }

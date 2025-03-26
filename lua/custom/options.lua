@@ -1,4 +1,4 @@
-vim.g.mapleader = " "  -- LEADER KEY: <SPACE>
+vim.g.mapleader = " " -- LEADER KEY: <SPACE>
 vim.o.filetype = "on"
 vim.o.syntax = "on"
 vim.o.cursorline = true
@@ -38,24 +38,3 @@ vim.o.foldlevel = 99 -- Open all folds by default
 
 vim.o.updatetime = 300
 vim.o.shortmess = vim.o.shortmess .. "c"
-
--- File-specific newline indicators
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "markdown", "text" },
-    callback = function()
-        vim.wo.showbreak = "NONE"
-    end,
-})
-
--- File-specific spacing
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "css", "html", "xml", "javascript", "tex", "yaml", "toml", "markdown" },
-	callback = function()
-		local bufnr = vim.api.nvim_get_current_buf()
-		vim.api.nvim_buf_set_option(bufnr, "tabstop", 2)
-		vim.api.nvim_buf_set_option(bufnr, "softtabstop", 2)
-		vim.api.nvim_buf_set_option(bufnr, "shiftwidth", 2)
-	end,
-})
-
--- UNDO OPTIONS: <session_basics.lua>

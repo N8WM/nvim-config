@@ -94,7 +94,7 @@ for _, ft in ipairs(enabled_ft) do
 			}),
 			sources = cmp.config.sources({
 				{ name = "calc", priority = 9 },
-				{ name = "spell", priority = 8, option = { keep_all_entries = false } },
+				{ name = "custom_spell", priority = 8, option = { keep_all_entries = true } },
 				{ name = "luasnip", priority = 7 },
 			}),
 		}),

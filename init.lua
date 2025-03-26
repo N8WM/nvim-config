@@ -2,6 +2,7 @@
 
 -- Lazy-independent
 require("custom.options")
+require("custom.cxt_prefs")
 require("custom.session_basics")
 require("custom.window_navigation")
 require("custom.diagnostics")

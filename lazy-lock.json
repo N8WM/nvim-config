@@ -7,7 +7,6 @@
   "cmp-calc": { "branch": "main", "commit": "5947b412da67306c5b68698a02a846760059be2e" },
   "cmp-dictionary": { "branch": "main", "commit": "c5ffc6afb7f3a68da981ed9c56f3d9d8f3d907b7" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "99290b3ec1322070bcfb9e846450a46f6efa50f0" },
-  "cmp-spell": { "branch": "master", "commit": "694a4e50809d6d645c1ea29015dad0c293f019d6" },
   "cmp_luasnip": { "branch": "master", "commit": "98d9cb5c2c38532bd9bdb481067b20fea8f32e90" },
   "copilot-cmp": { "branch": "master", "commit": "15fc12af3d0109fa76b60b5cffa1373697e261d1" },
   "copilot.lua": { "branch": "master", "commit": "d296017e588215df3f7b5796d1172f0d690fa13c" },
