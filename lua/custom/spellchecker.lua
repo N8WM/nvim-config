@@ -1,4 +1,3 @@
-local enabled_ft = { "markdown", "text" }
 local cmp = require("cmp")
 
 -- Helper function for spellcheck keybinds
@@ -19,40 +18,40 @@ end
 
 -- Enabling spellcheck and completion binding
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = enabled_ft,
+	pattern = vim.g.txt_files,
 	callback = function()
+		if require("custom.helpers.filetypes").txt_file_is_blacklisted() then
+			return
+		end
+
 		-- Enable spellcheck
 		vim.opt_local.spell = true
 		vim.opt_local.spelllang = "en_us"
 
 		-- Manual spell suggestion trigger
-		vim.keymap.set({ "n", "i" }, "<C-k>", function()
+		local function show_suggestions()
 			end_word_cursor()
 
 			vim.schedule(function()
 				cmp.complete({ config = { enabled = true } })
 			end)
-		end, {
-			desc = "Spelling suggestions",
-			buffer = true, -- make it local to the current markdown/text buffer
-		})
-		vim.keymap.set({ "n", "i" }, "<C-S-k>", function()
+		end
+
+		-- Choose first suggestion
+		local function choose_first()
 			local original_cursor = vim.api.nvim_win_get_cursor(0)
-
 			vim.cmd.normal("z=1")
-
 			local line = vim.fn.getline(original_cursor[1])
 			local new_col = math.min(original_cursor[2], #line)
 			vim.api.nvim_win_set_cursor(0, { original_cursor[1], new_col })
-		end, {
-			desc = "Choose first spelling suggestion",
-			buffer = true, -- make it local to the current buffer if desired
-		})
+		end
+
+		require("custom.keybinds").spell_checker(show_suggestions, choose_first)
 	end,
 })
 
 -- Override completions for spellchecked files
-for _, ft in ipairs(enabled_ft) do
+for _, ft in ipairs(vim.g.txt_files) do
 	cmp.setup.filetype(ft, {
 		sources = cmp.config.sources({
 			enabled = false,
@@ -60,38 +59,7 @@ for _, ft in ipairs(enabled_ft) do
 				completion = cmp.config.window.bordered(),
 				documentation = cmp.config.window.bordered(),
 			},
-			mapping = cmp.mapping.preset.insert({
-				["<C-b>"] = cmp.mapping.scroll_docs(-4),
-				["<C-f>"] = cmp.mapping.scroll_docs(4),
-				["<C-Space>"] = cmp.mapping.complete(),
-				["<Esc>"] = cmp.mapping.abort(),
-				["<CR>"] = cmp.mapping.confirm({ select = false }),
-				["<Tab>"] = vim.schedule_wrap(function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-					else
-						fallback()
-					end
-				end),
-
-				-- Close CMP window if cursor moves horizontally
-				["<Left>"] = cmp.mapping({
-					i = function(fallback)
-						if cmp.visible() then
-							cmp.close()
-						end
-						fallback()
-					end,
-				}),
-				["<Right>"] = cmp.mapping({
-					i = function(fallback)
-						if cmp.visible() then
-							cmp.close()
-						end
-						fallback()
-					end,
-				}),
-			}),
+			mapping = cmp.mapping.preset.insert(require("custom.keybinds").get_completion_map()),
 			sources = cmp.config.sources({
 				{ name = "calc", priority = 9 },
 				{ name = "custom_spell", priority = 8, option = { keep_all_entries = true } },

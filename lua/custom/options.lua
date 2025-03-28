@@ -38,3 +38,10 @@ vim.o.foldlevel = 99 -- Open all folds by default
 
 vim.o.updatetime = 300
 vim.o.shortmess = vim.o.shortmess .. "c"
+
+-- What should be treated as an editable text file?
+vim.g.txt_files = { "markdown", "text" }
+-- What text files should not be affected by this?
+vim.g.txt_files_blacklist = { "neo-tree", "help", "man", "qf", "TelescopePrompt", "terminal" }
+-- What filetypes should only have two spaces per tab?
+vim.g.two_space_tab_fts = { "css", "html", "xml", "javascript", "tex", "yaml", "toml", "markdown" }

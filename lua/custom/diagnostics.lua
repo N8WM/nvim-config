@@ -5,7 +5,7 @@ vim.diagnostic.config({
 })
 
 -- Define a function to toggle diagnostics
-local function toggleDiagnostics()
+local function toggle_diagnostics()
 	if vim.g.diagnostics_visible == nil then
 		vim.g.diagnostics_visible = true
 	end
@@ -22,8 +22,4 @@ local function toggleDiagnostics()
 end
 
 -- Set up a key mapping to toggle diagnostics
-vim.keymap.set("n", "<leader>d", toggleDiagnostics, {
-	noremap = true,
-	silent = true,
-	desc = "Toggle diagnostics",
-})
+require("custom.keybinds").diagnostics(toggle_diagnostics)
