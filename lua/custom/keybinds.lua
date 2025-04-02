@@ -13,6 +13,8 @@ end
 
 -- Always bound
 function M.general()
+    local tw = require("custom.contextual_prefs.two_space_tab_fts").set_buf_tab_width
+
 	map_many({
 		{ { "n", "v", "i" }, "<M-Up>", "<Esc><C-w><Up>", { desc = "Focus window above" } },
 		{ { "n", "v", "i" }, "<M-Down>", "<Esc><C-w><Down>", { desc = "Focus window below" } },
@@ -20,6 +22,8 @@ function M.general()
 		{ { "n", "v", "i" }, "<M-Right>", "<Esc><C-w><Right>", { desc = "Focus window right" } },
 		{ { "n", "v", "i" }, "<M-Tab>", "<Esc><C-w>w", { noremap = true, desc = "Next window" } },
 		{ { "n", "v", "i" }, "<M-S-Tab>", "<Esc><C-w>W", { noremap = true, desc = "Previous window" } },
+        { "n", "<leader>2", function() tw(2) end, { noremap = true, desc = "Buf tab width = 2" } },
+        { "n", "<leader>4", function() tw(4) end, { noremap = true, desc = "Buf tab width = 4" } },
 	})
 end
 
