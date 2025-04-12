@@ -1,8 +1,3 @@
-<style type="text/css">
-  .tab { margin-left: 20px; }
-  .centered { margin: auto; width: fit-content; }
-</style>
-
 # nvim-config
 Configuration files for my personal NVIM setup
 
