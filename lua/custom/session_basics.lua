@@ -9,6 +9,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- Remember undo history
-vim.o.undodir = os.getenv("HOME") .. "/.vim/backup"
+vim.o.undodir = vim.fn.expand('$HOME') .. "/.vim/backup"
 vim.o.undofile = true
 vim.o.undoreload = 10000
