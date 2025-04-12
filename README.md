@@ -28,7 +28,7 @@ Feel free to read through these first, but they are all included in the installa
 
 <details>
 <summary>Terminal Emulator Compatibility</summary>
-<div class="tab" id="emulator">
+<div style="margin-left: 20px" id="emulator">
 <h4>Tested and Recommended Terminal Emulators</h4>
 
 It is important to note that many default terminal emulators are simply not compatible with NVIM. This is often the case with older terminal emulators that do not implement some of the advanced features NVIM requires. One of the most notable of these is the MacOS default Terminal application. Compatibility with NVIM can be checked with a simple Google search, but I have listed a few popular ones I am familiar with.
@@ -41,13 +41,13 @@ I recommend finding a third-party terminal emulator that supports advanced termi
 
 <details>
 <summary>Shell Compatibility</summary>
-<div class="tab" id="shell">
+<div style="margin-left: 20px" id="shell">
 
 <h4>Tested Shells</h4>
 
 NVIM is advertised to work with most shells, but I have listed a few popular ones I have tested my config with as well as the machines I used.
 
-<div class="tab">
+<div style="margin-left: 20px">
 
 **[Bash](https://www.gnu.org/software/bash/)**  
 MacOS | Linux | WSL
@@ -66,7 +66,7 @@ Windows 11
 
 <details>
 <summary>NVIM Installation</summary>
-<div class="tab" id="nvim-installation">
+<div style="margin-left: 20px" id="nvim-installation">
 <h4>NVIM Version</h4>
 
 I am running NVIM v0.11.0, but this config should work on >=0.10.0.
@@ -93,7 +93,7 @@ To install Neovim, you can:
 
 <details>
 <summary>Nerd Font Installation</summary>
-<div class="tab" id="nerdfonts">
+<div style="margin-left: 20px" id="nerdfonts">
 <h4>Install a Nerd Font Typeface</h4>
 
 Install a *Nerd Font* typeface on your terminal emulator. Without a nerd font typeface, many of the niche symbols used in NVIM will likely not display correctly.
@@ -108,7 +108,7 @@ My go-to is **JetBrainsMono Nerd Font** ([download link](https://github.com/ryan
 
 <details>
 <summary>Required Dependencies</summary>
-<div class="tab" id="dependencies">
+<div style="margin-left: 20px" id="dependencies">
 
 <h4>Required Dependencies</h4>
 
@@ -146,7 +146,7 @@ Before you install the NVIM configuration files:
 This step is different depending on your operating system...
 #### For Mac/Linux/WSL (Bash, Zsh, etc.):
 
-<div class="tab">
+<div style="margin-left: 20px">
 
 First, save a backup of your previous NVIM configuration if desired. Then delete the configuration directory if it exists, with:
 ```sh
@@ -161,7 +161,7 @@ git clone https://github.com/N8WM/nvim-config.git ~/.config/nvim
 
 #### For Windows (PowerShell 5.1+):
 
-<div class="tab">
+<div style="margin-left: 20px">
 
 First, save a backup of your previous NVIM configuration if desired. Then delete the configuration directory if it exists, with:
 ```powershell
