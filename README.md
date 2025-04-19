@@ -118,6 +118,13 @@ Each of these dependencies must be installed on-device for full functionality of
 | [ripgrep](https://github.com/BurntSushi/ripgrep) | *recent* | for [Telescope](https://github.com/nvim-telescope/telescope.nvim) and potentially other plugins<ul><li>[`scoop install main/ripgrep`](https://scoop.sh/#/apps?q=ripgrep&id=ebbf0e99a88e30daac571268174c9289b58ca39b) for Windows</li><li>[`brew install ripgrep`](https://formulae.brew.sh/formula/ripgrep#default) for MacOS</li></ul> |
 | C compiler & libstdc++ | *recent* | for [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter) and potentially other plugins <br/>e.g., install [GCC](https://gcc.gnu.org/install/index.html):<ul><li>[`scoop install main/gcc`](https://scoop.sh/#/apps?q=gcc&id=fd50c09a38b69bd72e3483de086df59b976dcfbd) for Windows</li><li>[`brew install gcc`](https://formulae.brew.sh/formula/gcc#default) for MacOS</li></ul> |
 
+The following are optional.
+
+| Program | Notes |
+| - | - |
+| [GitHub CLI](https://cli.github.com/) | Hover context for assigned TODO's, issues, and PR's. <ul><li>[`scoop install main/gh`](https://scoop.sh/#/apps?q=gh&id=c8cf6e5f7b3162d4cd0297d380c36f9b68e07f08)</li><li>[`brew install gh`](https://formulae.brew.sh/formula/gh#default)</li></ul> |
+| [Jira CLI](https://github.com/ankitpokhrel/jira-cli) | Hover context for Jira issues<ul><li>[`scoop install extras/jira-cli`](https://scoop.sh/#/apps?q=jira&id=ff27aa7406291fe431c61dfbd643daaacec9e853)</li><li>[`brew install jira-cli`](https://formulae.brew.sh/formula/jira-cli#default)</li></ul>
+
 ---
 </div>
 </details>
@@ -173,10 +180,10 @@ git clone https://github.com/N8WM/nvim-config.git ~\AppData\Local\nvim
 ### Step 3: Booting Up for the First Time
 The first time running `nvim` after this command should install all dependencies and packages. If you have GitHub Copilot, the only thing left to do is to register your account (if you have one) with the command `:Copilot auth` with NVIM running. Other than that, the installation should be complete.
 
----
-### Step 4: Start Coding Already!
-Definitely don't get sucked into the...
-
-> *"Oh, wait---I could do this one hyper-specific task (that I'll only ever need to do exactly once) so much faster if I just quickly added this tiny little utility to the config…"*
-
-...rabbit hole. Not that I'd personally know anyone who'd fall for such an obvious trap, of course.
+<br/><br/>
+## TODOs
+- [ ] Set up [nvim-dap](https://github.com/mfussenegger/nvim-dap), an NVIM debugging tool
+- [ ] Implement `pcall(...)` around each `require`  
+  (to prevent unwanted error propagation)
+- [ ] Add documentation for keybinds, options, configuration
+- [ ] Refactor! :/

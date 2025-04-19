@@ -2,32 +2,28 @@ return {
 	"akinsho/bufferline.nvim",
 	version = "*",
 	dependencies = "nvim-tree/nvim-web-devicons",
+    after = "catppuccin",
 	config = function()
-		local current_dir_full_path = vim.fn.getcwd()
-		local current_dir_name = vim.fn.fnamemodify(current_dir_full_path, ":t")
-
-		vim.opt.termguicolors = true
-
 		local bufferline = require("bufferline")
+        local highlights = require("catppuccin.groups.integrations.bufferline").get()
+
+        highlights.indicator_selected = { fg = "#64a4ff" }
+
 		bufferline.setup({
+            highlights = highlights,
 			options = {
 				diagnostics = "nvim_lsp",
 				separator_style = "thin",
 				offsets = {
 					{
 						filetype = "neo-tree",
-						text = current_dir_name,
-						highlight = "Directory",
+						-- text = vim.fn.fnamemodify(vim.fn.getcwd(), ":t"),
 						separator = true,
-                        text_align = "left"
+                        text_align = "left",
+                        highlight = "Normal"
 					},
 				},
-				style_preset = bufferline.style_preset.minimal,
-			},
-			highlights = {
-				indicator_selected = {
-					fg = "#64a4ff",
-				},
+				style_preset = bufferline.style_preset.no_bold,
 			},
 		})
 

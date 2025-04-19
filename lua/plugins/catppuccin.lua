@@ -11,9 +11,24 @@ return {
 			integrations = {
 				bufferline = true,
 				cmp = true,
+                dropbar = {
+                    enabled = true,
+                    color_mode = false,
+                },
 				gitsigns = true,
+                indent_blankline = {
+                    enabled = true,
+                },
+                markdown = true,
+                mason = true,
+                native_lsp = {
+                    enabled = true,
+                },
 				neotree = true,
 				noice = true,
+                telescope = {
+                    enabled = true,
+                },
 				treesitter = true,
 				notify = true,
 				mini = {

@@ -1,6 +1,7 @@
 vim.g.mapleader = " " -- LEADER KEY: <SPACE>
 vim.o.filetype = "on"
 vim.o.syntax = "on"
+vim.o.termguicolors = true
 vim.o.cursorline = true
 vim.o.expandtab = true
 vim.o.tabstop = 4

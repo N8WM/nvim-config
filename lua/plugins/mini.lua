@@ -4,15 +4,6 @@ return {
 	config = function()
 		require("mini.move").setup()
 
-		require("mini.comment").setup({
-			mappings = {
-				comment = "<C-/>",
-				comment_line = "<C-/>",
-				comment_visual = "<C-/>",
-				textobject = "gc",
-			},
-		})
-
 		local map = require("mini.map")
 		map.setup({
 			symbols = {
