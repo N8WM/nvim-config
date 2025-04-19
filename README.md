@@ -7,8 +7,7 @@ Configuration files for my personal NVIM setup
 
 *Inspired by [@typecraft](https://www.youtube.com/@typecraft_dev)*
 
-> I really need to put in a new screenshot, this one's over a year old  
-> Now then, where could I find some good demo code...
+> Old screenshot, need to update it
 
 ## Background
 This is an attempt at making my own NVIM configuration. My goal is to be able to install this configuration on any machine in place of an IDE, without the hassle of manual configuration. The project is actively in development, but most of the essential IDE features are already present, making it more than suitable for regular use.
