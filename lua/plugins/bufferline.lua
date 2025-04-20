@@ -8,6 +8,7 @@ return {
         local highlights = require("catppuccin.groups.integrations.bufferline").get()
         local catppuccin = require("catppuccin.palettes").get_palette(vim.g.catppuccin_flavor)
         local title_text = require("custom.neotree_title").title
+        local keybinds = require("custom.keybinds").bufferline
 
         highlights.indicator_selected = { fg = "#64a4ff" }
         highlights.offset_separator = { fg = catppuccin.base, bg = catppuccin.crust }
@@ -30,21 +31,6 @@ return {
 			},
 		})
 
-		vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", {
-			silent = true,
-			desc = "Move to the next buffer",
-		})
-		vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", {
-			silent = true,
-			desc = "Move to the previous buffer",
-		})
-		vim.keymap.set("n", "<leader><Tab>", ":BufferLineMoveNext<CR>", {
-			silent = true,
-			desc = "Move the active buffer to the next position",
-		})
-		vim.keymap.set("n", "<leader><S-Tab>", ":BufferLineMovePrev<CR>", {
-			silent = true,
-			desc = "Move the active buffer to the previous position",
-		})
+		keybinds()
 	end,
 }
