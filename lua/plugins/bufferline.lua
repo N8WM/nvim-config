@@ -6,8 +6,11 @@ return {
 	config = function()
 		local bufferline = require("bufferline")
         local highlights = require("catppuccin.groups.integrations.bufferline").get()
+        local catppuccin = require("catppuccin.palettes").get_palette(vim.g.catppuccin_flavor)
+        local title_text = require("custom.neotree_title").title
 
         highlights.indicator_selected = { fg = "#64a4ff" }
+        highlights.offset_separator = { fg = catppuccin.base, bg = catppuccin.crust }
 
 		bufferline.setup({
             highlights = highlights,
@@ -17,13 +20,13 @@ return {
 				offsets = {
 					{
 						filetype = "neo-tree",
-						-- text = vim.fn.fnamemodify(vim.fn.getcwd(), ":t"),
-						separator = true,
+                        text = title_text,
+						separator = "▌",
                         text_align = "left",
                         highlight = "Normal"
 					},
 				},
-				style_preset = bufferline.style_preset.no_bold,
+				-- style_preset = bufferline.style_preset.default,
 			},
 		})
 

@@ -55,5 +55,6 @@ return {
             }
 		})
 		vim.cmd.colorscheme("catppuccin")
+        vim.g.catppuccin_flavor = flavor
 	end,
 }
